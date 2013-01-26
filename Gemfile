@@ -18,6 +18,13 @@ group :production do
 end
 
 gem 'devise'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
+gem 'underscore_extensions'
+gem 'backbone_extensions'
+gem 'rails-backbone'
+gem 'delayed_job'
+gem 'dynamic_form'
+gem 'delayed_job_active_record'
 
 
 # Gems used only for assets and not required

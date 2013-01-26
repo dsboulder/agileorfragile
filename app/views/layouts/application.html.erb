@@ -8,7 +8,12 @@
 </head>
 <body>
 
+<p class="notice"><%= flash.notice %></p>
+<p class="alert"><%= flash.alert %></p>
+
+<div id="root">
 <%= yield %>
+</div>
 
 </body>
 </html>

@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require underscore
+//= require backbone
+
+//= require nvd3/lib/d3.v2
+//= require nvd3/nv.d3
 //= require_tree .
+

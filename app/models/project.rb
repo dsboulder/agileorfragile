@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
-  attr_accessible :tracker_id, :enabled, :name, :enabled_labels, :enabled_labels_list, :all_labels, :current_velocity
-  has_many :iterations, :dependent => :delete_all, :order => :number
+  attr_accessible :tracker_id, :enabled, :name, :enabled_labels, :enabled_labels_list, :all_labels, :current_velocity, :last_snapshot_at
+  has_many :iterations, :dependent => :delete_all
   has_many :stories, :dependent => :delete_all
   has_many :labelings, :dependent => :delete_all
   has_many :labels, :through => :labelings
@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   scope :enabled, where(:enabled => true)
 
   def self.fetch!
-    Project.enabled.each do |proj|
+    Project.all.each do |proj|
       begin
         proj.fetch!
       rescue
@@ -17,6 +17,10 @@ class Project < ActiveRecord::Base
         raise
       end
     end
+  end
+
+  def number_of_iterations_for_velocity
+    3
   end
 
   def enabled_label_ids
@@ -36,22 +40,41 @@ class Project < ActiveRecord::Base
   end
 
   def fetch!
+    now = Date.today
     tracker_proj = Tracker::Project.find(tracker_id)
     iters = tracker_proj.iterations(:current_backlog)
+    done_iters = tracker_proj.iterations(:done, :offset => -8)
     transaction do
       # kill existing data
-      stories.clear
-      iterations.clear
-      labelings.clear
+      stories.taken_on(now).delete_all
+      iterations.taken_on(now).delete_all
+      labelings.taken_on(now).delete_all
 
       # insert new data
-      iters.each do |i|
-        i.to_iter(self).save!
+      (done_iters + iters).each do |i|
+        i.to_iter(self, now).save!
       end
-      self.update_attributes!(:current_velocity => tracker_proj.current_velocity)
+      self.update_attributes!(:current_velocity => tracker_proj.current_velocity, :last_snapshot_at => now)
     end
 
     iterations.reload
     self
+  end
+
+  def velocities(taken_on = last_snapshot_date)
+    current_iter = iterations.taken_on(taken_on).current.first
+    done_iters = current_iter.previous_n(8 - number_of_iterations_for_velocity)
+    (done_iters + [current_iter]).inject([]) do |memo, iter|
+      memo << {iteration: iter, velocity: iter.velocity, accepted: iter.points_accepted}
+    end
+  end
+
+  def last_snapshot_date
+    last_snapshot_at.to_date
+  end
+
+  def agile
+    now = Date.today
+
   end
 end

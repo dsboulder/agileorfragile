@@ -7,8 +7,8 @@ module Tracker
       integer "current_velocity"
     end
 
-    def iterations(filter = :current)
-      Tracker::Iteration.all(:from => filter, :params => {:project_id => id})
+    def iterations(filter = :current, params = {})
+      Tracker::Iteration.all(:from => filter, :params => {:project_id => id}.merge(params))
     end
 
     def current_velocity
