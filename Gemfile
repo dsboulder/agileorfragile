@@ -17,15 +17,15 @@ group :production do
   gem 'pg'
 end
 
+gem 'thin'
 gem 'devise'
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails'
 gem 'underscore_extensions'
 gem 'backbone_extensions'
 gem 'rails-backbone'
 gem 'delayed_job'
 gem 'dynamic_form'
 gem 'delayed_job_active_record'
-
+gem 'rails_admin'
 
 # Gems used only for assets and not required
 # in production environments by default.

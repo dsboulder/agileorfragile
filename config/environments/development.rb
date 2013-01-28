@@ -10,7 +10,10 @@ Agileorfragile::Application.configure do
   config.whiny_nils = true
 
   # Enable threaded mode
-  config.threadsafe!
+  threadsafe = true
+  threadsafe = false if defined?($rails_rake_task) && $rails_rake_task
+  threadsafe = false if ENV["NOTHREADS"]
+  config.threadsafe! if threadsafe
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true

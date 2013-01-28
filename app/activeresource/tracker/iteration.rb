@@ -5,15 +5,19 @@ module Tracker
     def to_iter(record_project, taken_on)
       now = Time.now
       labelings = {}
-      ::Iteration.new(:start => start, :finish => finish, :number => number, :taken_on => taken_on).tap do |i|
+      ::Iteration.new(:start => start, :finish => finish, :number => number, :taken_on => taken_on,
+                      :iteration_length => ((finish - start).to_i / 7.days).round, :team_strength => team_strength).tap do |i|
         i.project = record_project
 
         # derive iteration type
         i.kind = case true
-          when i.finish < now then "done"
-          when i.start >= now then "backlog"
-          else "current"
-        end
+                   when i.finish < now then
+                     "done"
+                   when i.start >= now then
+                     "backlog"
+                   else
+                     "current"
+                 end
 
         # create story records
         i.stories = stories.map do |s|

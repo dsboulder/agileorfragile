@@ -72,9 +72,4 @@ class Project < ActiveRecord::Base
   def last_snapshot_date
     last_snapshot_at.to_date
   end
-
-  def agile
-    now = Date.today
-
-  end
 end

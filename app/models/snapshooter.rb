@@ -5,8 +5,10 @@ class Snapshooter < Struct.new(:project_id)
   handle_asynchronously :snapshot
 
   def self.snapshot_all
-    Project.all.each do |project|
+    projects = Project.all
+    projects.each do |project|
       Snapshooter.new(project.id).snapshot
     end
+    projects
   end
 end

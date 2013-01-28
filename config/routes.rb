@@ -1,4 +1,8 @@
 Agileorfragile::Application.routes.draw do
+  devise_for :admins
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   resources :projects, only: [:index, :show]
   devise_for :users
 
