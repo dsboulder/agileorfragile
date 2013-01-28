@@ -1,9 +1,11 @@
 Agileorfragile::Application.routes.draw do
+
   devise_for :admins
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :projects, only: [:index, :show]
+  resources :jobs, only: [:index, :create]
   devise_for :users
 
   # The priority is based upon order of creation:

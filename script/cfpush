@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+rake assets:precompile RAILS_ENV=production NOTHREADS=1
+vmc push
+rake assets:clean NOTHREADS=1

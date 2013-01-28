@@ -1,0 +1,8 @@
+<h1>Jobs</h1>
+<% if @existing_job %>
+  <%=  @existing_job.inspect %>
+<% else %>
+  <%= form_tag(jobs_path) do %>
+    <%= submit_tag "Create master enqueuing job" %>
+  <% end %>
+<% end %>
