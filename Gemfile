@@ -26,6 +26,7 @@ gem 'delayed_job'
 gem 'dynamic_form'
 gem 'delayed_job_active_record'
 gem 'rails_admin'
+gem 'handlebars_assets'
 
 # Gems used only for assets and not required
 # in production environments by default.

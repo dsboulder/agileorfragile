@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.json { render :json => @project.to_json(:methods => :velocities) }
+      format.json { render :json => @project.to_json(:methods => [:velocities, :fragiles]) }
     end
   end
 end

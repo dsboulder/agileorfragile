@@ -72,4 +72,8 @@ class Project < ActiveRecord::Base
   def last_snapshot_date
     last_snapshot_at.to_date
   end
+
+  def fragiles
+    Fragile::Base.run_all(self)
+  end
 end

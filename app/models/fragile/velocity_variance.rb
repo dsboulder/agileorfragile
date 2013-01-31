@@ -12,17 +12,18 @@ module Fragile
       end
       avg = (vel4.sum / vel4.length.to_f)
       variance_factors = vel4.map{|v| (avg - v).abs / avg * 100 }
-      avg_variance = variance_factors.to_f / variance_factors.length.to_f
+      avg_variance = variance_factors.sum.to_f / variance_factors.length.to_f
       messages = []
-      messages << "Your average velocity variance (#{avg_variance.round}%) should be less than 30%" if avg_variance > 0.3
-      messages << "Your maximum velocity variance (#{variance_factors.max.round}%) should be less than 50%" if variance_factors.max > 0.5
+      messages << "Your average velocity variance (#{avg_variance.round}%) should be less than 30%" if avg_variance > 30.0
+      messages << "Your maximum velocity variance (#{variance_factors.max.round}%) should be less than 50%" if variance_factors.max > 50.0
       {
           :active => messages.any?,
           :metrics => {
               :average_velocity => avg,
-              :average_velocity_variance => avg_variance,
-              :max_velocity_variance => variance_factors.max
+              :average_velocity_variance => avg_variance.round,
+              :max_velocity_variance => variance_factors.max.round
           },
+          :bar_graph => vel4,
           :messages => messages,
           :measured => "Your last #{last4.length} velocities (average #{avg.round}) are compared with each other"
       }
