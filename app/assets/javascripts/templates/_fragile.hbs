@@ -1,0 +1,30 @@
+<div class="item {{fragileCssClasses}}">
+  <a href="#" class="name">{{name}}</a>
+
+  <div class="details">
+    <p class="description">{{description}}</p>
+
+    <p class="measured">{{results/measured}}</p>
+    {{#results}}
+      {{#if messages}}
+        <h5>Test failures:</h5>
+        <ul class="messages">
+          {{#messages}}
+            <li class="message">{{.}}</li>
+          {{/messages}}
+        </ul>
+      {{/if}}
+
+      <h5>Metrics:</h5>
+      <dl class="metrics">
+        {{#metrics}}
+          <dt>{{name}}</dt>
+          <dd>{{value}} {{units}}</dd>
+        {{/metrics}}
+      </dl>
+
+      <h5>Graph:</h5>
+      {{makeChart}}
+    {{/results}}
+  </div>
+</div>

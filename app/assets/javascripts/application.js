@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require underscore
+//= require underscore.string
 //= require backbone
+//= require handlebars.runtime
 
 //= require nvd3/lib/d3.v2
 //= require nvd3/nv.d3

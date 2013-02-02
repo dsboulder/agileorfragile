@@ -2,13 +2,94 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.header .fragile {
-  text-align: right;
+#root {
+  margin: 0 10px;
 }
-.header .notices {
+
+.header h3 {
   text-align: center;
+}
+
+.header h4 {
+  font-weight: normal;
+  margin-bottom: 3px;
+  text-decoration: underline;
 }
 .velocity_chart {
   width: 400px;
   height: 150px;
+}
+
+.content .item {
+  padding: 5px 8px;
+  border: 1px solid #bbb;
+  background-color: #f5f5f5;
+  opacity: 0.6
+}
+
+.content .item.active, .content .item.expanded {
+  opacity: 1.0;
+}
+
+section.fragile .content .item.active {
+  background-color: #FDD;
+  border: 1px solid #E99;
+}
+
+.content .item a:hover {
+  text-decoration: underline;
+}
+.content .item a {
+  text-decoration: none;
+  color: #000;
+}
+
+.content .item .name {
+  font-weight: bold;
+  display: block;
+}
+
+.content .item .details {
+  display: none;
+  margin-top: 5px;
+}
+
+.content .item .details p {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.content .item .details .message {
+  font-size: 12px;
+}
+
+.content .item .details dl {
+  margin-top: 0;
+  font-size: 11px;
+}
+.content .item .details dt {
+  width: 60%;
+  float: left;
+  line-height: 1.2;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.content .item .details dt:first-child + dd {
+  border-top: 1px solid #666;
+}
+.content .item .details dd {
+  line-height: 1.3;
+  border-bottom: 1px solid #666;
+  border-right: 1px solid #666;
+  border-left: 1px solid #666;
+}
+
+.content .item .details svg {
+  width: 100%;
+  height: 200px;
+}
+
+.content .item .details svg text {
+  font-size: 12px;
 }

@@ -20,8 +20,7 @@ end
 gem 'thin'
 gem 'devise'
 gem 'underscore_extensions'
-gem 'backbone_extensions'
-gem 'rails-backbone'
+gem 'rails-backbone', "0.9.10"
 gem 'delayed_job'
 gem 'dynamic_form'
 gem 'delayed_job_active_record'

@@ -6,7 +6,7 @@ module Fragile
     end
 
     def run
-      last4 = @velocities.reverse.first(4)
+      last4 = @velocities.reverse.first(4).reverse
       vel4 = last4.map do |vel|
         vel[:velocity].to_f
       end
@@ -15,15 +15,27 @@ module Fragile
       avg_variance = variance_factors.sum.to_f / variance_factors.length.to_f
       messages = []
       messages << "Your average velocity variance (#{avg_variance.round}%) should be less than 30%" if avg_variance > 30.0
-      messages << "Your maximum velocity variance (#{variance_factors.max.round}%) should be less than 50%" if variance_factors.max > 50.0
+      messages << "Your worst velocity variance (#{variance_factors.max.round}%) should be less than 50%" if variance_factors.max > 50.0
       {
           :active => messages.any?,
-          :metrics => {
-              :average_velocity => avg,
-              :average_velocity_variance => avg_variance.round,
-              :max_velocity_variance => variance_factors.max.round
+          :metrics => [
+              {name: 'Average velocity', value: avg, units: 'points'},
+              {name: 'Lowest velocity', value: vel4.min, units: 'points'},
+              {name: 'Highest velocity', value: vel4.max, units: 'points'},
+              {name: 'Average velocity variance', value:avg_variance.round, units: 'percent'},
+              {name: 'Worst velocity variance', value:variance_factors.max.round, units: 'percent'}
+          ],
+          :bar_graph => {
+                  data: last4.map do |vel|
+                    v = vel[:velocity].to_f
+                    {x: vel[:iteration].number,
+                     y: v,
+                    class: (avg - v).abs / avg * 100 >= 50.0 ? "bad" : "good"}
+                  end,
+                  x_axis: 'Recent Iterations',
+                  y_axis: 'Velocity',
+                  title: "Velocity"
           },
-          :bar_graph => vel4,
           :messages => messages,
           :measured => "Your last #{last4.length} velocities (average #{avg.round}) are compared with each other"
       }
@@ -33,6 +45,10 @@ module Fragile
       @velocities.length >= project.number_of_iterations_for_velocity * 2 ?
           true :
           "Need at least #{project.number_of_iterations_for_velocity * 2} past velocities, but only found #{@velocities.length}"
+    end
+
+    def name
+      "High velocity variance"
     end
 
     def description
