@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   def fetch_projects
     dead_projects = projects.all
+    Tracker::Base.current_user = self
     Tracker::Project.all.each do |proj|
       project = projects.find_or_create_by_tracker_id(proj.id)
       project.name = proj.name

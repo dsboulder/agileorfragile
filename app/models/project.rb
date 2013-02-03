@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :stories, :dependent => :delete_all
   has_many :labelings, :dependent => :delete_all
   has_many :labels, :through => :labelings
+  belongs_to :user
 
   scope :enabled, where(:enabled => true)
 
@@ -60,6 +61,7 @@ class Project < ActiveRecord::Base
 
   def fetch!
     now = Date.today
+    Tracker::Base.current_user = user
     tracker_proj = Tracker::Project.find(tracker_id)
     iters = tracker_proj.iterations(:current_backlog)
     done_iters = tracker_proj.iterations(:done, :offset => -8)
