@@ -6,6 +6,8 @@ Agileorfragile::Application.routes.draw do
 
   resources :projects, only: [:index, :show]
   resources :jobs, only: [:index, :create]
+
+  post "/fix_story_ids", to: 'jobs#fix_story_ids'
   devise_for :users
 
   # The priority is based upon order of creation:

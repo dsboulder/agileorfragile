@@ -17,3 +17,10 @@ test:
   database: agile_test
   username: root
   password: password
+
+production:
+  adapter: mysql2
+  database: agile_prod
+  username: root
+  password: password
+

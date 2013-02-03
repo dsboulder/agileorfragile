@@ -19,6 +19,21 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def self.fix_story_ids
+    updated = 0
+    Project.transaction do
+      Project.all.each do |proj|
+        proj.stories.taken_on(proj.last_snapshot_at.to_date).each do |story|
+          if story.tracker_id
+            updated += proj.stories.where({name: story.name}).update_all({tracker_id: story.tracker_id})
+          end
+        end
+      end
+    end
+    updated
+  end
+
+
   def number_of_iterations_for_velocity
     3
   end
