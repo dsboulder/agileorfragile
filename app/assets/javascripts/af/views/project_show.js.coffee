@@ -3,8 +3,10 @@ AF.Views.ProjectShow = Backbone.View.extend(
     @project = options.project
     @listenTo(@project, 'change', @render)
     @delegateEvents
-      "click a.name": (e) -> $(e.target).closest('.item').toggleClass('expanded').find('.details').slideToggle
-        complete: => $(window).trigger('resize')
+      "click a.name": (e) ->
+        e.preventDefault()
+        $(e.target).closest('.item').toggleClass('expanded').find('.details').slideToggle
+          complete: => $(window).trigger('resize')
   render: ->
     json = @project.toJSON()
     html = HandlebarsTemplates.fragiles json

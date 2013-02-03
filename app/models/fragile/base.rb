@@ -7,6 +7,7 @@ module Fragile
 
     def self.run_all(project)
       Fragile::Base.subclasses.map do |subclass|
+        Rails.logger.info "Running #{subclass}..."
         i = subclass.new(project)
         runnable = i.runnable
         h = {:runnable => runnable.is_a?(TrueClass)}

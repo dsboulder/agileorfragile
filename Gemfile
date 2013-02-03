@@ -4,17 +4,13 @@ gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'mysql2'
+gem 'cloudfoundry-jquery-rails'
 
 group :development do
-  # you can comment out any of these you aren't using
-  gem 'sqlite3'
-  gem 'cloudfoundry-jquery-rails'
 end
 
 group :production do
-  # you can comment out any of these you aren't using
-  gem 'mysql2'
-  gem 'pg'
 end
 
 gem 'thin'

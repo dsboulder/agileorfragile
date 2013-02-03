@@ -39,6 +39,10 @@ class Project < ActiveRecord::Base
     all_labels.split(",").map(&:strip)
   end
 
+  def past_snapshots_count
+    iterations.taken_on_weekday.count("taken_on", :distinct => true)
+  end
+
   def fetch!
     now = Date.today
     tracker_proj = Tracker::Project.find(tracker_id)

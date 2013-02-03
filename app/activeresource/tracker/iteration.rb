@@ -25,6 +25,7 @@ module Tracker
             Tracker::Iteration::Story.schema.except("description", "labels", "created_at").keys.each do |key|
               story.send("#{key}=", s.send(key))
             end
+            story.tracker_id = s.id
             story.tracker_labels = s.labels
             story.tracker_created_at = s.created_at
             story.project = record_project

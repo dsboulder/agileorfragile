@@ -4,27 +4,37 @@
   <div class="details">
     <p class="description">{{description}}</p>
 
-    <p class="measured">{{results/measured}}</p>
-    {{#results}}
-      {{#if messages}}
-        <h5>Test failures:</h5>
-        <ul class="messages">
-          {{#messages}}
-            <li class="message">{{.}}</li>
-          {{/messages}}
-        </ul>
-      {{/if}}
+    {{#if runnable}}
+      <p class="measured">{{results/measured}}</p>
+      {{#results}}
+        {{#if messages}}
+          <h5>Test failures:</h5>
+          <ul class="messages">
+            {{#messages}}
+              <li class="message">{{linkify .}}</li>
+            {{/messages}}
+          </ul>
+        {{/if}}
 
-      <h5>Metrics:</h5>
-      <dl class="metrics">
-        {{#metrics}}
-          <dt>{{name}}</dt>
-          <dd>{{value}} {{units}}</dd>
-        {{/metrics}}
-      </dl>
+        {{#if metrics}}
+          <h5>Metrics:</h5>
+          <dl class="metrics">
+            {{#metrics}}
+              <dt>{{name}}</dt>
+              <dd>{{value}} {{units}}</dd>
+            {{/metrics}}
+          </dl>
+        {{/if}}
 
-      <h5>Graph:</h5>
-      {{makeChart}}
-    {{/results}}
+        {{#if bar_graph}}
+          <h5>Graph:</h5>
+          {{makeChart}}
+        {{/if}}
+      {{/results}}
+    {{else}}
+      <h5>Could not run test</h5>
+
+      <p class="norun-message">{{norun_message}}</p>
+    {{/if}}
   </div>
 </div>

@@ -43,7 +43,7 @@ Agileorfragile::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-  config.after_initialize do
+  config.to_prepare do
     Rails.application.eager_load!
   end
 end

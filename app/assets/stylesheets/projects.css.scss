@@ -20,6 +20,9 @@
   height: 150px;
 }
 
+.content .item + .item{
+  margin-top: 5px;
+}
 .content .item {
   padding: 5px 8px;
   border: 1px solid #bbb;
@@ -61,6 +64,11 @@ section.fragile .content .item.active {
 
 .content .item .details .message {
   font-size: 12px;
+}
+
+.content .item .details .norun-message {
+  font-size: 12px;
+  font-style: italic;
 }
 
 .content .item .details dl {

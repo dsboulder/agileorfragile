@@ -3,6 +3,7 @@ class Iteration < ActiveRecord::Base
   has_many :stories
   belongs_to :project
   scope :taken_on, lambda { |taken_on| where(:taken_on => taken_on) }
+  scope :taken_on_weekday, where("WEEKDAY(taken_on) < 5")
   scope :done, where(kind: 'done')
   scope :current, where(kind: 'current')
   scope :backlog, where(kind: 'backlog')
