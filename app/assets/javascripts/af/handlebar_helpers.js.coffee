@@ -12,7 +12,7 @@ Handlebars.registerHelper 'lengthOf', (array) ->
 
 Handlebars.registerHelper 'linkify', (msg) ->
   msg = Handlebars.Utils.escapeExpression(msg)
-  linkified = msg.replace(/\#(\d+)/, "<a href='https://www.pivotaltracker.com/story/show/$1' target='_blank'>$&</a>")
+  linkified = msg.replace(/\#(\d+)/g, "<a href='https://www.pivotaltracker.com/story/show/$1' target='_blank'>$&</a>")
   new Handlebars.SafeString(linkified)
 
 Handlebars.registerHelper 'makeChart', () ->

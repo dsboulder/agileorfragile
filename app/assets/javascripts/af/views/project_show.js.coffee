@@ -23,6 +23,8 @@ AF.Views.ProjectShow = Backbone.View.extend(
           .width($graph.closest('item').width())
           .height(svg.height())
           .tooltips(false)
+          .showValues(true)
+          .valueFormat(d3.format(',.0f'))
           .color (d,i) =>
             if d.class == 'bad' then '#aa0000' else '#1f77b4'
           .margin
@@ -31,7 +33,7 @@ AF.Views.ProjectShow = Backbone.View.extend(
         chart.yAxis.showMaxMin(false).tickFormat (y) =>
           Math.round(y)
         chart.xAxis.showMaxMin(false).tickFormat (x) =>
-          Math.round(x)
+          if x.length then x else Math.round(x)
         chart.xAxis.axisLabel $graph.data('graphXAxis') if $graph.data('graphXAxis')
         chart.yAxis.axisLabel $graph.data('graphYAxis') if $graph.data('graphYAxis')
         data =

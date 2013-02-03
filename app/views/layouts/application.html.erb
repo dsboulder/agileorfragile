@@ -7,6 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<nav>
+  <% if current_admin %>
+    <%= link_to "Admin", "/admin" %> |
+  <% end %>
+  <%= link_to "Projects", projects_path %> |
+  <% if current_user %>
+    <%= link_to "My account", edit_user_registration_path %> |
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+</nav>
 
 <% if flash.notice %>
   <p class="notice"><%= flash.notice %></p>

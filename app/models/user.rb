@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates_presence_of :tracker_token
+  validates_uniqueness_of :tracker_token
 
-  has_many :projects
+  has_many :projects, :dependent => :destroy
 
   def fetch_projects
     dead_projects = projects.all

@@ -37,7 +37,7 @@ module Fragile
                   title: "Velocity"
           },
           :messages => messages,
-          :measured => "Your last #{last4.length} velocities (average #{avg.round}) are compared with each other"
+          :measured => "Your last #{last4.length} velocities are compared with the average velocity"
       }
     end
 

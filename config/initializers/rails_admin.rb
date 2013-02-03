@@ -30,7 +30,7 @@ RailsAdmin.config do |config|
   # config.excluded_models = ['Iteration', 'Label', 'Labeling', 'Project', 'Story', 'User']
 
   # Include specific models (exclude the others):
-  config.included_models = ['Iteration', 'Label', 'Labeling', 'Project', 'Story', 'User', 'Delayed::Job']
+  config.included_models = ['Iteration', 'Label', 'Labeling', 'Project', 'Story', 'User','Admin', 'Delayed::Job']
 
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
