@@ -59,6 +59,10 @@ class Project < ActiveRecord::Base
     iterations.taken_on_weekday.count("taken_on", :distinct => true)
   end
 
+  def latest_story_snapshots
+    stories.where(:taken_on => last_snapshot_at.to_date)
+  end
+
   def fetch!
     now = Date.today
     Tracker::Base.current_user = user

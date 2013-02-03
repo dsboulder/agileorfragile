@@ -1,6 +1,13 @@
 <h1>Your projects</h1>
 <ul>
   <% @projects.each do |project| %>
-    <li><%=  link_to project.name, project_path(project)  %></li>
+    <li>
+      <strong><%=  link_to project.name, project_path(project)  %></strong>
+      <% if project.last_snapshot_at %>
+        <p>
+          Last snapshot of <%= pluralize project.latest_story_snapshots.count, "story" %> taken <%= time_ago_in_words project.last_snapshot_at %> ago, <%= project.past_snapshots_count %> snapshots available
+        </p>
+      <% end %>
+    </li>
   <% end  %>
 </ul>
