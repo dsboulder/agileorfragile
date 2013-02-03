@@ -1,26 +1,30 @@
 {{#fragiles}}
-  {{#if active}}
     <h4>Active problems</h4>
-    <div class="active">
+    {{#if active}}
+    <section class="active">
       {{#active}}
         {{> _fragile}}
       {{/active}}
-    </div>
-  {{/if}}
+    </section>
+    {{else}}
+      <div class="no-active">
+          You have no active problems!
+      </div>
+    {{/if}}
   {{#if inactive}}
-    <h4>Inactive problems</h4>
-    <div class="inactive">
+    <h4><a href="#">{{lengthOf inactive}} Inactive problems</a></h4>
+    <section class="inactive">
       {{#inactive}}
         {{> _fragile}}
       {{/inactive}}
-    </div>
+    </section>
   {{/if}}
   {{#if nonrunnable}}
-    <h4>Unverifiable problems</h4>
-    <div class="nonrunnable">
+    <h4><a href="#">{{lengthOf nonrunnable}} Unverifiable problems</a></h4>
+    <section class="nonrunnable">
       {{#nonrunnable}}
         {{> _fragile}}
       {{/nonrunnable}}
-    </div>
+    </section>
   {{/if}}
 {{/fragiles}}

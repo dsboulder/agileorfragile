@@ -3,6 +3,9 @@ AF.Views.ProjectShow = Backbone.View.extend(
     @project = options.project
     @listenTo(@project, 'change', @render)
     @delegateEvents
+      "click h4 > a": (e) ->
+        e.preventDefault()
+        $(e.target).closest("h4").next().slideToggle()
       "click a.name": (e) ->
         e.preventDefault()
         $(e.target).closest('.item').toggleClass('expanded').find('.details').slideToggle

@@ -20,6 +20,18 @@
   height: 150px;
 }
 
+h4 > a {
+  color: #999;
+}
+
+section.inactive, section.nonrunnable {
+  display: none;
+}
+
+.fragile .no-active {
+  color: #0A0;
+}
+
 .content .item + .item{
   margin-top: 5px;
 }
