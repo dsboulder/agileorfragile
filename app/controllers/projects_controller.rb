@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
 
   def show
     @project = current_user.projects.find(params[:id])
-    @velocities = @project.velocities
 
     respond_to do |format|
       format.html {}

@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
-  attr_accessible :current_state, :tracker_labels, :name, :owned_by, :requested_by, :tracker_id, :url, :project_id, :story_type, :tracker_created_at, :taken_on, :estimate
+  attr_accessible :current_state, :tracker_labels, :name, :owned_by, :requested_by, :tracker_id, :url, :project_id, :story_type,
+                  :tracker_created_at, :taken_on, :estimate, :comments, :unfinished_tasks, :finished_tasks
   has_many :labelings
   has_many :labels, :through => :labelings
   belongs_to :project

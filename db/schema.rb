@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128050701) do
+ActiveRecord::Schema.define(:version => 20130203190239) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -87,13 +87,13 @@ ActiveRecord::Schema.define(:version => 20130128050701) do
     t.integer  "tracker_id"
     t.integer  "user_id"
     t.string   "name"
-    t.text     "all_labels",       :default => "", :null => false
-    t.text     "enabled_labels",   :default => "", :null => false
+    t.text     "all_labels",       :null => false
+    t.text     "enabled_labels",   :null => false
     t.boolean  "enabled"
     t.datetime "last_snapshot_at"
     t.integer  "current_velocity"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20130128050701) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 5
+    t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
@@ -125,8 +125,11 @@ ActiveRecord::Schema.define(:version => 20130128050701) do
     t.string   "tracker_labels"
     t.datetime "tracker_created_at"
     t.date     "taken_on"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "comments",           :default => 0
+    t.integer  "unfinished_tasks",   :default => 0
+    t.integer  "finished_tasks",     :default => 0
   end
 
   add_index "stories", ["project_id", "iteration_id"], :name => "index_stories_on_project_id_and_iteration_id"
