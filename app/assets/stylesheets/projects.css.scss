@@ -105,6 +105,26 @@ section.fragile .content .item.active {
   border-left: 1px solid #666;
 }
 
+.content .item .details li:before {
+  content: '\2718';
+  color: red;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.content .item .details ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.content .item .details li {
+  list-style-type: none;
+  margin-left: 0;
+  margin-top: 0;
+  padding-left: 0;
+  font-size: 11px;
+}
+
 .content .item .details svg {
   width: 100%;
   height: 200px;

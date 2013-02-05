@@ -9,7 +9,7 @@ class Story < ActiveRecord::Base
   scope :taken_on, lambda { |taken_on| where(:taken_on => taken_on) }
   scope :taken_before, lambda { |taken_on| where(["taken_on < ?", taken_on]).order("taken_on DESC") }
   scope :taken_on_weekday, where("WEEKDAY(taken_on) < 5")
-  scope :in_state, lambda { |state| where(:current_state => state) }
+  scope :in_state, lambda { |states| where(:current_state => [states].flatten) }
   scope :estimated, where("estimate > -1")
 
   def serializable_hash(options)
